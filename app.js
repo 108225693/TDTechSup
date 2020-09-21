@@ -3,7 +3,7 @@ App({
   path: {
     api: 'https://www.tiedate.ltd:18889/weixin/',
     appid: 'wx0c3589bd6809e46e',
-    secret: 'fcdcfaaf565113d93852312a89ad606e',
+    secret: '',
     token: '',
     wxLoginStatus: true,
     wxLoginData: '',
