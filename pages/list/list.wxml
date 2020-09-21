@@ -1,0 +1,38 @@
+<view class="bgcolor">
+    <view wx:if="{{tempdata}}" class="nodata">
+        暂无问题，请发布问题！
+    </view>
+    <scroll-view wx:else scroll-y bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll">
+        <view class="faq-wrap">
+            <view class="list" wx:key="faqlist" wx:for="{{faqlist}}" wx:for-index="index" wx:for-item="item" data-id="{{item.id}}" data-status="{{item.status}}" wx:if="{{item.status != '4'}}" bindtap="content">
+                <view class="title">
+                    <span class="status status-wran" wx:if="{{item.status == '1'}}">未回复</span>
+                    <span class="status status-reply" wx:if="{{item.status == '2'}}">已回复</span>
+                    <span class="status" wx:if="{{item.status == '3'}}">已关闭</span>
+                    <span class="org" wx:if="{{item.orgId != null}}">{{orgJson[index].name}}</span>
+                    <span class="project" wx:if="{{item.projectId != null}}">{{projectJson[index].name}}</span>
+                </view>
+                <view class="title">{{item.title}}</view>
+                <view class="cont" wx:if="{{item.content==''}}">该问题暂无详细描述</view>
+                <view class="cont" wx:else>{{item.content}}</view>
+                <view class="info">
+                    <image class="avatar" src="{{item.avatar}}"></image>
+                    <span style="float:left">{{item.name}}</span>
+                    <span class="time">{{item.jhiTime}}</span>
+                </view>
+            </view>
+        </view>
+    </scroll-view>
+
+    <view wx:if="{{faqadmin}}">
+      <view class="tools">
+        <button class="button" disabled="true">管理员无法发布问题</button>
+      </view>
+    </view>
+    <view wx:else>
+      <view class="tools" wx:if="{{faqbutton}}">
+          <button bindtap="link" class="button" type="primary">发布问题</button>
+      </view>
+    </view>
+    <view class="blank"></view>
+</view>

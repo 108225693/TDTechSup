@@ -1,0 +1,26 @@
+<view class="res-wrap">
+    <form bindsubmit="faqPost">
+        <view class="green">标题</view>
+        <input class="title" name="title" placeholder="写下你的问题" />
+        <view class="m20 green">机构</view>        
+        <picker bindchange="mechanismChange" value="{{mechanismArray[mechanismIndex].id}}" range="{{mechanismArray}}" range-key="{{'name'}}">
+            <input class="title" disabled name="mechanism" value="{{mechanismArray[mechanismIndex].name}}" />
+            <view class="arrow"></view>
+        </picker>
+        <view class="m20 green">产品类型</view>        
+        <picker bindchange="productypeChange" value="{{productypeArray[productypeIndex].id}}" range="{{productypeArray}}" range-key="{{'name'}}">
+            <input class="title" disabled name="productype" value="{{productypeArray[productypeIndex].name}}" />
+            <view class="arrow"></view>
+        </picker>
+        <view class="m20 green">内容</view>
+        <textarea name="content" class="cont" placeholder="详细描述问题，以便获得准确的回答" />
+        <view class="addpic">
+            <view bindtap="addpiclist" class="atts">+ 添加图片</view>
+        </view>
+        <image wx:key="pic" wx:for="{{pic}}" wx:for-index="index" wx:for-item="pic" wx:if="{{pic!=''}}" src="{{pic.path}}" class="viewpic"></image>
+        <view class="blank"></view>
+        <view class="tools">
+            <button form-type="submit" type="primary" disabled="{{dissubmit}}" class="m20">提交</button>
+        </view>
+    </form>
+</view>

@@ -1,0 +1,82 @@
+<view class="fz14">
+  <view class="bt80">
+    <view class="title">{{content.title}}</view>
+    <view class="wrap">
+      <span class="fl">
+        <image class="avatar" src="{{content.avatar}}"></image>
+      </span>
+      <span class="fl">{{content.name}}</span>
+      <span class="fr">{{content.jhiTime}}</span>
+    </view>
+    <view class="type">
+      <span class="fl">{{orgJson.name}}</span>
+      <span class="fr">{{projectJson.name}}</span>
+    </view>
+    <view style="clear:both"></view>
+    <view class="text" wx:if="{{content.content==''}}">该问题暂无详细描述</view>
+    <view class="text" wx:else>
+      <text>{{content.content}}</text>
+    </view>
+    <view class="text center" wx:if="{{content.image!=''}}">
+      <image style="width:calc(100% - 10px);" wx:key="piclist" wx:for="{{piclist}}" wx:for-index="index" wx:for-item="piclist" src="{{piclist}}"></image>
+    </view>
+    <view wx:key="commentlist" wx:if="{{commentlist!=''}}" wx:for="{{commentlist}}" wx:for-index="index" wx:for-item="list">
+      <view class="wrap recom">
+        <image class="avatar" src="{{list.avatar}}"></image>
+        <span class="fl">{{list.name}}</span>        
+        <span class="fr replyButton">回复</span>
+        <span class="fr">{{list.jhiTime}}</span>
+      </view>
+      <view class="replycontent">
+        <text>{{list.content}}</text>        
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{replybutton}}" class="tools">
+    <button bindtap="reply" class="operation" type="primary">回复问题</button>
+    <button bindtap="faqdel" class="operation" type="warn">删除问题</button>
+    <button bindtap="faqclose" class="operation">关闭问题</button>
+  </view>
+
+  <view wx:if="{{closebutton}}" class="tools">
+    <button bindtap="reply" class="button" disabled="true">该问题已关闭</button>
+  </view>
+
+  <view wx:if="{{replystatus}}" class="reply">
+    <form bindsubmit="replyok" report-submit="true">
+      <textarea name="replycontent" class="replytext" value="" placeholder="请围绕问题回答，并加入自身经验见解" />
+      <button form-type="submit" form-type="submit" type="primary">提交</button>
+    </form>
+    <button form-type="submit" bindtap="replycancal">取消回复</button>
+  </view>
+
+  <view wx:if="{{self}}" class="tools">
+    <button bindtap="faqedit" class="operation" type="primary">修改问题</button>
+    <button bindtap="faqdel" class="operation" type="warn">删除问题</button>
+    <button bindtap="faqclose" class="operation">关闭问题</button>
+  </view>
+
+  <view wx:if="{{editstatus}}" class="reply">
+    <form bindsubmit="editok">
+      <picker bindchange="mechanismChange" value="{{mechanismArray[mechanismIndex].id}}" range="{{mechanismArray}}" range-key="{{'name'}}">
+        <input class="mechanismSelect" disabled name="mechanism" value="{{mechanismArray[mechanismIndex].name}}" />
+        <view class="arrow"></view>
+      </picker>
+      <picker bindchange="productypeChange" value="{{productypeArray[productypeIndex].id}}" range="{{productypeArray}}" range-key="{{'name'}}">
+        <input class="mechanismSelect" disabled name="productype" value="{{productypeArray[productypeIndex].name}}" />
+        <view class="arrow"></view>
+      </picker>
+      <input auto-focus value="{{modeltitle}}" name="edittitle" class="edittitle" />
+      <textarea value="{{modelcontent}}" name="editcontent" class="replytext" />
+      <view class="addpic">
+        <view bindtap="addpic" class="atts">+ 添加图片</view>
+      </view>
+      <image wx:key="pic" wx:for="{{pic}}" wx:for-index="index" wx:for-item="pic" wx:if="{{pic!=''}}" src="{{pic}}" class="viewpic"></image>
+      <button form-type="submit" form-type="submit" type="primary">提交</button>
+    </form>
+    <button form-type="submit" bindtap="editcancal">取消修改</button>
+  </view>
+
+  <view class="blank"></view>
+</view>
